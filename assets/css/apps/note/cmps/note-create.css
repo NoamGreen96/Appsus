@@ -1,0 +1,19 @@
+form {
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 7px;
+  margin: 0 auto;
+  box-shadow: 0 1px 7px rgb(128, 128, 128);
+  padding: 0.4375em;
+}
+
+.create-note-container {
+}
+
+form input,
+textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 1rem;
+}
