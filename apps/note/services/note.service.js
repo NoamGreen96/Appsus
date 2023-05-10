@@ -11,7 +11,9 @@ export const noteService = {
 }
 
 function query() {
-    return asyncStorageService.query(NOTE_KEY)
+    return asyncStorageService.query(NOTE_KEY).then(notes => {
+        return notes
+    })
 }
 
 function _createNotes() {
@@ -27,7 +29,8 @@ function _createNotes() {
 }
 
 function _createNote(title, content) {
-    const newNote = getEmptyNote(title, content)
+    console.log('title,content', title, content)
+    const newNote = { title, content }
     newNote.id = utilService.makeId()
     return newNote
 }

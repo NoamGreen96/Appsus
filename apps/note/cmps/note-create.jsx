@@ -10,11 +10,11 @@ export function CreateNote({ notes, setNotes }) {
   function onSubmitNote(ev) {
     ev.preventDefault()
 
-    if (!notes.title.trim() || !notes.content.trim()) {
-      // showErrorMsg('Please fill all fields')
-      return
-    }
-    noteService.save(notes).then((notes) => setNotes())
+    // if (!notes.title.trim() || !notes.content.trim()) {
+    //   // showErrorMsg('Please fill all fields')
+    //   return
+    // }
+    noteService.save(notes).then((notes) => setNotes(notes))
     // AddNote()
     console.log('notes', notes)
     console.log('ev', ev)
@@ -25,12 +25,13 @@ export function CreateNote({ notes, setNotes }) {
   //       return [...prevValue, newNote]
   //     })
   //   }
+  const { title, content } = notes
 
   return (
     <div className="create-note-container">
       <form>
         <input
-          value={notes.title}
+          value={title}
           className="form-title"
           type="text"
           placeholder="Note Title"
@@ -40,7 +41,7 @@ export function CreateNote({ notes, setNotes }) {
 
         <p>
           <textarea
-            value={notes.content}
+            value={content}
             name="content"
             placeholder="Take a note..."
             onChange={handleChange}
