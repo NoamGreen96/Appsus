@@ -14,17 +14,17 @@ export function CreateNote({ notes, setNotes }) {
       // showErrorMsg('Please fill all fields')
       return
     }
-    noteService.save(notes).then((notes) => addNote(notes))
+    noteService.save(notes).then((notes) => setNotes())
     // AddNote()
     console.log('notes', notes)
     console.log('ev', ev)
   }
 
-  function addNote(newNote) {
-    setNotes((prevValue) => {
-      return [...prevValue, newNote]
-    })
-  }
+  //   function addNote(newNote) {
+  //     setNotes((prevValue) => {
+  //       return [...prevValue, newNote]
+  //     })
+  //   }
 
   return (
     <div className="create-note-container">
