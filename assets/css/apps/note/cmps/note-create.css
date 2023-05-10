@@ -1,4 +1,5 @@
 form {
+  position: relative;
   max-width: 600px;
   background-color: #fff;
   border-radius: 7px;
@@ -7,7 +8,19 @@ form {
   padding: 0.4375em;
 }
 
-.create-note-container {
+.btn-submit {
+  cursor: pointer;
+  position: absolute;
+  background-color: rgb(255, 200, 18);
+  border: none;
+  border-radius: 50%;
+  bottom: -1.125rem;
+  right: 1.125rem;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 0 1px 3px rgb(165, 165, 165);
+  outline: none;
+  padding: 4px;
 }
 
 form input,

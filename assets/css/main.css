@@ -20,3 +20,4 @@
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
 @import './apps/note/cmps/note-create.css'; /* @import './apps/mail/cmps/mail-list.css'; */
+@import './apps/note/cmps/note-preview.css';
