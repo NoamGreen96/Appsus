@@ -12,8 +12,8 @@ export function NoteIndex() {
   }, [])
 
   function loadNotes() {
-    noteService.query().then((note) => {
-      return setNotes(note)
+    noteService.query().then((notes) => {
+      return setNotes(notes)
     })
   }
 
@@ -21,13 +21,12 @@ export function NoteIndex() {
     setNotes((prevValue) => [{ ...prevValue, newNote }])
   }
 
-  console.log('notes', notes)
+  console.log('notes at index', notes)
   return (
     <section className="note-index">
       <h1>Note App</h1>
       <CreateNote notes={notes} setNotes={setNotes} onAdd={addNote} />
       <NoteList notes={notes} />
-      <NotePreview notes={notes} setNotes={setNotes} />
     </section>
   )
 }
