@@ -1,16 +1,21 @@
 const { Link, NavLink } = ReactRouterDOM
 
+
 export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <h3>LOGO!</h3>
+            <img className="header-logo" src="assets/img/appsus-logo.png" alt="" />
         </Link>
         <nav>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/mail">Mail</NavLink>
-            <NavLink to="/note">Note</NavLink>
+            {/* home */}
+            <NavLink className="fa-solid fa-house" title="Home" to="/"></NavLink>
+            {/* About */}
+            <NavLink className="fa-solid fa-address-card" title="About" to="/about"></NavLink>
+            {/* Mail */}
+            <NavLink className="fa-solid fa-envelope" title="Mail" to="/mail"></NavLink>
+            {/* Note */}
+            <NavLink className="fa-solid fa-clipboard" title="Note" to="/note"></NavLink>
         </nav>
     </header>
 }
