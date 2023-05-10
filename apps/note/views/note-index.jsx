@@ -1,5 +1,6 @@
 import { CreateNote } from '../cmps/note-create.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
+import { NotePreview } from '../cmps/note-preview.jsx'
 
 export function NoteIndex() {
   return (
