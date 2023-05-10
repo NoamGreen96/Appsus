@@ -12,21 +12,30 @@ export function MailIndex() {
     // const [selectedMail, setSelectedMail] = useState(null)
 
     useEffect(() => {
-        // loadMails()
+        showSuccessMsg('Welcome to mail')
+        loadMails()
     })
 
 
     function loadMails() {
         mailService.query().then(mail =>
-            setMails(mail)
             // console.log(mail)
+            setMails(mail)
         )
     }
+    // function onSelectBook(book) {
+    //     setSelectedBook(book)
+    // }
 
 
+    // console.log('render')
     return <div>
+        {/* Main Navigation */}
         <MailMainNav />
-        <MailList mails={mails} />
+        {/* Mails  */}
+        <MailList
+            // onSelectMail={onSelectMail} 
+            mails={mails} />
     </div>
 }
 

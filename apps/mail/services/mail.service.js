@@ -1,5 +1,6 @@
 // mail service:
 import { storageService } from '../../../services/storage.service.js'
+import { asyncStorageService } from '../../../services//async-storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 const MAIL_KEY = 'mailDB'
@@ -13,8 +14,7 @@ export const mailService = {
 
 
 function query() {
-  return storageService.query(MAIL_KEY).then(mails => {
-    console.log(mails)
+  return asyncStorageService.query(MAIL_KEY).then(mails => {
     return mails
   })
 }
