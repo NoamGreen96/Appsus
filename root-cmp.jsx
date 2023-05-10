@@ -7,7 +7,6 @@ import { Home } from './views/home.jsx'
 import { MailIndex } from './apps/mail/views/mail-index.jsx'
 import { NoteIndex } from './apps/note/views/note-index.jsx'
 
-console.log('HELLO FROM TEDUARD')
 export function App() {
   return (
     <Router>
