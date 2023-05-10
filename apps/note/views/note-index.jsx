@@ -9,24 +9,24 @@ export function NoteIndex() {
   const [notes, setNotes] = useState([])
   useEffect(() => {
     loadNotes()
-  }, [setNotes])
+  }, [])
 
   function loadNotes() {
     noteService.query().then((note) => {
-      setNotes(note)
+      return setNotes(note)
     })
   }
 
-  // function addNote(newNote) {
-  //   setNotes((prevValue) => {
-  //     return [...prevValue, newNote]
-  //   })
-  // }
+  function addNote(newNote) {
+    setNotes((prevValue) => [{ ...prevValue, newNote }])
+  }
+
   console.log('notes', notes)
   return (
     <section className="note-index">
       <h1>Note App</h1>
-      <CreateNote notes={notes} setNotes={setNotes} />
+      <CreateNote notes={notes} setNotes={setNotes} onAdd={addNote} />
+      <NoteList notes={notes} />
       <NotePreview notes={notes} setNotes={setNotes} />
     </section>
   )
