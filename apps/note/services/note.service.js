@@ -33,9 +33,9 @@ function _createNotes() {
     }
 }
 
-function _createNote(title, content) {
+function _createNote(title, content, backgroundColor = '#fff') {
     console.log('title,content', title, content)
-    const newNote = { title, content }
+    const newNote = { title, content, backgroundColor }
     newNote.id = utilService.makeId()
     return newNote
 }

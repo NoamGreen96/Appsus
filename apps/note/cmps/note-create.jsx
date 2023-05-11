@@ -46,8 +46,11 @@ export function CreateNote({ notes, setNotes, onAdd }) {
       showSuccessMsg('Note successfully added!')
     })
   }
+  function handleColorChange({ target }) {
+    newNote.backgroundColor = target.value
+  }
 
-  const { title, content } = notes
+  const { title, content, color } = notes
 
   return (
     <div className="create-note-container">
@@ -78,6 +81,14 @@ export function CreateNote({ notes, setNotes, onAdd }) {
         <button onClick={onSubmitNote} className="btn-submit">
           Add
         </button>
+        <input
+          value={color}
+          className="note-background-color"
+          type="color"
+          placeholder="Note backgroundColor"
+          name="backgroundColor"
+          onChange={handleColorChange}
+        />
       </form>
     </div>
   )
