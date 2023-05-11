@@ -1,9 +1,11 @@
 const { useEffect, useState } = React
 
 import { noteService } from '../services/note.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export function CreateNote({ notes, setNotes, onAdd }) {
   const [newNote, setNewNote] = useState(noteService.getEmptyNote())
+  const [showTitle, setShowTitle] = useState(false)
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -17,49 +19,76 @@ export function CreateNote({ notes, setNotes, onAdd }) {
     }
   }, [newNote])
 
+  function handleContentClick() {
+    setShowTitle(true)
+  }
+
+  function handleTitleBlur() {
+    if (!newNote.title.length) setShowTitle(false)
+    else return
+  }
+
+  function handleTitleClick() {
+    setShowTitle(true)
+  }
+
   function handleChange({ target }) {
     const field = target.name
     const value = target.type === 'number' ? +target.value || '' : target.value
     setNewNote((prevNote) => ({ ...prevNote, [field]: value }))
   }
 
-  // useEffect(() => console.log('notes from createlist', notes), [notes])
-
   function onSubmitNote(ev) {
     ev.preventDefault()
-    noteService.addNote(newNote, notes)
-    setNotes((prevValue) => ({ ...prevValue, ...notes }))
+    noteService.save(newNote).then((note) => {
+      const updatedNotes = [...notes, note]
+      setNotes(updatedNotes)
+      showSuccessMsg('Note successfully added!')
+    })
   }
-  //   function addNote(newNote) {
-  //     setNotes((prevValue) => {
-  //       return [...prevValue, newNote]
-  //     })
-  //   }
-  const { title, content } = notes
+  function handleColorChange({ target }) {
+    newNote.backgroundColor = target.value
+  }
+
+  const { title, content, color } = notes
 
   return (
     <div className="create-note-container">
       <form>
-        <input
-          value={title}
-          className="form-title"
-          type="text"
-          placeholder="Note Title"
-          name="title"
-          onChange={handleChange}
-        />
+        {showTitle && (
+          <input
+            value={title}
+            className="note-title"
+            type="text"
+            placeholder="Note Title"
+            name="title"
+            onChange={handleChange}
+            onBlur={handleTitleBlur}
+            onClick={handleTitleClick}
+          />
+        )}
 
         <p>
           <textarea
             value={content}
             name="content"
+            className="note-content"
             placeholder="Take a note..."
             onChange={handleChange}
+            onClick={handleContentClick}
           ></textarea>
         </p>
         <button onClick={onSubmitNote} className="btn-submit">
           Add
         </button>
+        <input
+          value={color}
+          className="note-background-color"
+          type="color"
+          placeholder="Note backgroundColor"
+          name="backgroundColor"
+          onChange={handleColorChange}
+        />
       </form>
     </div>
   )

@@ -8,12 +8,15 @@ export const noteService = {
     query,
     save,
     getEmptyNote,
-    addNote
+    remove
+}
+
+function remove(noteId) {
+    return asyncStorageService.remove(NOTE_KEY, noteId)
 }
 
 function query() {
     return asyncStorageService.query(NOTE_KEY).then(notes => {
-        console.log('notes from query', notes)
         return notes
     })
 }
@@ -30,15 +33,9 @@ function _createNotes() {
     }
 }
 
-function addNote(newNote, notes) {
-    newNote.id = utilService.makeId()
-    const updatedNotes = [...notes, newNote]
-    storageService.saveToStorage(NOTE_KEY, updatedNotes)
-}
-
-function _createNote(title, content) {
+function _createNote(title, content, backgroundColor = '#fff') {
     console.log('title,content', title, content)
-    const newNote = { title, content }
+    const newNote = { title, content, backgroundColor }
     newNote.id = utilService.makeId()
     return newNote
 }

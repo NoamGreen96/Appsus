@@ -16,7 +16,7 @@
 
 import { NotePreview } from './note-preview.jsx'
 
-export function NoteList({ newNote, notes }) {
+export function NoteList({ notes, onRemoveNote }) {
   console.log('notes from noteLIST', notes)
   return (
     // <ul>
@@ -24,10 +24,10 @@ export function NoteList({ newNote, notes }) {
     //     <NotePreview note={note} key={note.id} />
     //   ))}
     // </ul>
-    <ul>
+    <ul className="clean-list flex">
       {notes.map((note) => (
-        <li key={note.id}>
-          <NotePreview note={note} />
+        <li className="note" key={note.id}>
+          <NotePreview note={note} onRemoveNote={onRemoveNote} />
         </li>
       ))}
     </ul>
