@@ -1,7 +1,9 @@
 import { MailMainNav } from "../cmps/mail-main-nav.jsx";
 import { MailList } from "../cmps/mail-list.jsx";
 import { mailService } from "../services/mail.service.js";
+import { NewMail } from "../cmps/add-mail.jsx";
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
+
 
 const { useEffect, useState } = React
 const { Link } = ReactRouterDOM
@@ -18,20 +20,24 @@ export function MailIndex() {
 
 
     function loadMails() {
-        mailService.query().then(mail =>
+        mailService.query().then(mail => {
             // console.log(mail)
-            setMails(mail)
+            return setMails(mail)
+        }
         )
     }
     // function onSelectBook(book) {
     //     setSelectedBook(book)
     // }
 
-
     // console.log('render')
-    return <div>
+    return <div className="main-layout">
         {/* Main Navigation */}
         <MailMainNav />
+        {/* newEmail */}
+
+        {/* <button><Link to={NewMail}></Link></button> */}
+        {/* <NewMail /> */}
         {/* Mails  */}
         <MailList
             // onSelectMail={onSelectMail} 
