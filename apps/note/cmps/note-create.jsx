@@ -1,32 +1,35 @@
+const { useEffect, useState } = React
+
 import { noteService } from '../services/note.service.js'
 
 export function CreateNote({ notes, setNotes, onAdd }) {
-  function handleChange({ target }) {
-    // const field = target.name
-    // const value = target.type === 'number' ? +target.value || '' : target.value
-    // setNotes((prevNote) => ({ ...prevNote, [field]: value }))
-    const { field, value } = target.value
-    setNotes((prevValue) => {
-      return {
-        ...prevValue,
-        [field]: value,
+  const [newNote, setNewNote] = useState(noteService.getEmptyNote())
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      if (notes) {
+        console.log('notes from debounce', notes)
       }
-    })
+    }, 1000)
+    return () => {
+      console.log('clear timeout')
+      clearTimeout(debounce)
+    }
+  }, [newNote])
+
+  function handleChange({ target }) {
+    const field = target.name
+    const value = target.type === 'number' ? +target.value || '' : target.value
+    setNewNote((prevNote) => ({ ...prevNote, [field]: value }))
   }
+
+  // useEffect(() => console.log('notes from createlist', notes), [notes])
 
   function onSubmitNote(ev) {
     ev.preventDefault()
-    onAdd(notes)
-    // if (!notes.title.trim() || !notes.content.trim()) {
-    //   // showErrorMsg('Please fill all fields')
-    //   return
-    // }
-    noteService.save(notes).then((notes) => setNotes(notes))
-    // AddNote()
-    console.log('notes', notes)
-    console.log('ev', ev)
+    noteService.addNote(newNote, notes)
+    setNotes((prevValue) => ({ ...prevValue, ...notes }))
   }
-
   //   function addNote(newNote) {
   //     setNotes((prevValue) => {
   //       return [...prevValue, newNote]

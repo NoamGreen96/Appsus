@@ -7,7 +7,8 @@ _createNotes()
 export const noteService = {
     query,
     save,
-    getEmptyNote
+    getEmptyNote,
+    addNote
 }
 
 function query() {
@@ -29,6 +30,12 @@ function _createNotes() {
     }
 }
 
+function addNote(newNote, notes) {
+    newNote.id = utilService.makeId()
+    const updatedNotes = [...notes, newNote]
+    storageService.saveToStorage(NOTE_KEY, updatedNotes)
+}
+
 function _createNote(title, content) {
     console.log('title,content', title, content)
     const newNote = { title, content }
@@ -37,7 +44,7 @@ function _createNote(title, content) {
 }
 
 function getEmptyNote() {
-    return { id: '', title: '', content: '' }
+    return { title: '', content: '' }
 }
 
 function save(note) {

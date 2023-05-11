@@ -4,11 +4,11 @@
 // }
 
 export const NotePreview = ({ note }) => {
-  console.log('note', note.note)
+  console.log('note from preview', note)
   return (
-    <li>
-      {note.title}
-      {/* <button onClick={onHandleClick}>X</button> */}
-    </li>
+    <article className="note-preview">
+      <h2>{note.title}</h2>
+      <p>{note.content}</p>
+    </article>
   )
 }

@@ -17,15 +17,17 @@ export function NoteIndex() {
     })
   }
 
-  function addNote(newNote) {
-    setNotes((prevValue) => [{ ...prevValue, newNote }])
-  }
-
+  // function addNote(newNote) {
+  //   setNotes((prevValue) => {
+  //     return [...prevValue, newNote]
+  //   })
+  // }
+  // onAdd={addNote}
   console.log('notes at index', notes)
   return (
     <section className="note-index">
       <h1>Note App</h1>
-      <CreateNote notes={notes} setNotes={setNotes} onAdd={addNote} />
+      <CreateNote notes={notes} setNotes={setNotes} />
       <NoteList notes={notes} />
     </section>
   )
