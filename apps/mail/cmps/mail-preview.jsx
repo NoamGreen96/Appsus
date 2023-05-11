@@ -1,20 +1,17 @@
-const { useState } = React
-// Unfunction
+import { LongTxt } from "../../../cmps/long-txt"
 
-export function MailPreview({ mail }) {
+
+export function EmailPreview({ mail, onRemoveEmail }) {
+  // console.log(onRemoveEmail)
+
   return (
-    // <tr>
-    //   <td>{mail.from}</td>
-    //   <td>{mail.subject}</td>
-    //   <td>{mail.body}</td>
-    //   <td>{mail.sentAt}</td>
-    // </tr>
-    <tr>
+    <React.Fragment>
+      <td>  <button onClick={() => onRemoveEmail(mail.id)}>Delete this mail Mail</button>
+      </td>
       <td>{mail.from}</td>
       <td>{mail.subject}</td>
       <td>{mail.body}</td>
       <td>{mail.sentAt}</td>
-
-    </tr>
+    </React.Fragment>
   )
 }
