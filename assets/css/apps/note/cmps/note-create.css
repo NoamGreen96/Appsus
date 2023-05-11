@@ -6,16 +6,23 @@ form {
   margin: 0 auto;
   box-shadow: 0 1px 7px rgb(128, 128, 128);
   padding: 0.4375em;
+  margin-block-end: 40px;
 }
 
 .btn-submit {
-  cursor: pointer;
+  opacity: 0;
   position: absolute;
+  bottom: -1.125rem;
+  right: 1.125rem;
+}
+
+form:hover .btn-submit {
+  transition: 0.7s;
+  opacity: 1;
+  cursor: pointer;
   background-color: rgb(255, 200, 18);
   border: none;
   border-radius: 50%;
-  bottom: -1.125rem;
-  right: 1.125rem;
   width: 2rem;
   height: 2rem;
   box-shadow: 0 1px 3px rgb(165, 165, 165);
@@ -25,8 +32,26 @@ form {
 
 form input,
 textarea {
+  outline: none;
   width: 100%;
   border: none;
   resize: none;
   font-size: 1rem;
 }
+
+/* textarea {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  border: none;
+  resize: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+} */
+
+/* .note-title:focus,
+.note-content:focus {
+  background-color: blue;
+} */

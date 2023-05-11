@@ -14,12 +14,12 @@
 @import './apps/note/views/note-index.css';
 @import './apps/mail/views/mail-index.css';
 
-
-
 /* Cmps */
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
-@import './apps/note/cmps/note-create.css'; 
+@import './apps/note/cmps/note-create.css';
+@import './apps/note/cmps/note-list.css';
+
 @import './apps/mail/cmps/mail-list.css';
 @import './apps/mail/cmps/mail-main-nav.css';
 @import './apps/note/cmps/note-preview.css';

@@ -1,4 +1,5 @@
 .note {
+  position: relative;
   background-color: #fff;
   width: 240px;
   border-radius: 7px;
@@ -6,4 +7,25 @@
   padding: 0.625rem;
   margin: 1rem;
   /* float: left; */
+}
+
+.btn-delete-note {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.note:hover .btn-delete-note {
+  transition: 0.7s;
+  opacity: 1;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 50%;
+  right: 0;
+  top: -10px;
+  width: 1.5rem;
+  height: 1.5rem;
+  /* background-color: rgb(213, 81, 81); */
+  background-color: black;
+  color: whitesmoke;
 }

@@ -3,12 +3,14 @@
 //   // return <li>{note.title}</li>
 // }
 
-export const NotePreview = ({ note }) => {
-  console.log('note from preview', note)
+export const NotePreview = ({ note, onRemoveNote }) => {
   return (
     <article className="note-preview">
-      <h2>{note.title}</h2>
+      <h1>{note.title}</h1>
       <p>{note.content}</p>
+      <button onClick={() => onRemoveNote(note.id)} className="btn-delete-note">
+        X
+      </button>
     </article>
   )
 }

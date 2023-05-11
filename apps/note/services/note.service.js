@@ -8,7 +8,11 @@ export const noteService = {
     query,
     save,
     getEmptyNote,
+    remove
+}
 
+function remove(noteId) {
+    return asyncStorageService.remove(NOTE_KEY, noteId)
 }
 
 function query() {
