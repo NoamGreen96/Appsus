@@ -23,18 +23,14 @@ export function CreateNote({ notes, setNotes, onAdd }) {
     setNewNote((prevNote) => ({ ...prevNote, [field]: value }))
   }
 
-  // useEffect(() => console.log('notes from createlist', notes), [notes])
-
   function onSubmitNote(ev) {
     ev.preventDefault()
-    noteService.addNote(newNote, notes)
-    setNotes((prevValue) => ({ ...prevValue, ...notes }))
+    noteService.save(newNote).then((note) => {
+      const updatedNotes = [...notes, note]
+      setNotes(updatedNotes)
+    })
   }
-  //   function addNote(newNote) {
-  //     setNotes((prevValue) => {
-  //       return [...prevValue, newNote]
-  //     })
-  //   }
+
   const { title, content } = notes
 
   return (

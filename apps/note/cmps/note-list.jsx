@@ -16,7 +16,7 @@
 
 import { NotePreview } from './note-preview.jsx'
 
-export function NoteList({ newNote, notes }) {
+export function NoteList({ notes }) {
   console.log('notes from noteLIST', notes)
   return (
     // <ul>
