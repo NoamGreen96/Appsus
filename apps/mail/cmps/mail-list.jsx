@@ -3,25 +3,22 @@ const { Link } = ReactRouterDOM
 import { MailPreview } from "./mail-preview.jsx"
 
 export function MailList({ mails }) {
-    console.log(mails)
     return (
-        <ul className="mail-list">
-            {mails.map(mail =>
-                <li key={mail.id}>
-                    <MailPreview mail={mail} />
-                    <section>
-                        {/* btn here */}
-                    </section>
-                </li>
-            )}
-        </ul>
+
+        <table className="fl-table">
+
+            <tbody>
+                {mails.map(mail =>
+                    <tr key={mail.id}>
+                        <td>{mail.from}</td>
+                        <td>{mail.subject}</td>
+                        <td>{mail.body}</td>
+                        <td>{mail.sentAt}</td>
+                    </tr>
+                )}
+            </tbody>
+        </table >
+
     )
 
 }
-
-
-{/* <button onClick={() => onRemoveBook(book.id)} >Remove Book</button>
-                        <button><Link to={`/book/${book.id}`}>Details</Link>
-                        </button> */}
-
-{/* <button><Link to={`/book/edit/${book.id}`} >Edit</Link></button> */ }

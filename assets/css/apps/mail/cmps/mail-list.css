@@ -1,1 +1,15 @@
  /* mail list */
+
+ .fl-table {
+    flex: 1;
+}
+
+.fl-table td, .fl-table th {
+  padding: 8px;
+}
+
+.fl-table td {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
