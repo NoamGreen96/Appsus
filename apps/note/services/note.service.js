@@ -12,6 +12,7 @@ export const noteService = {
 
 function query() {
     return asyncStorageService.query(NOTE_KEY).then(notes => {
+        console.log('notes from query', notes)
         return notes
     })
 }
