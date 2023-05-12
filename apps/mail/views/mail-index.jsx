@@ -1,13 +1,12 @@
-import { MailMainNav } from "../cmps/mail-main-nav.jsx";
-import { MailList } from "../cmps/mail-list.jsx";
+import { EmailList } from "../cmps/mail-list.jsx";
 import { mailService } from "../services/mail.service.js";
-import { NewMail } from "../cmps/add-mail.jsx";
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
-
+import { EmailCompose } from "../cmps/mail-compose.jsx";
+import { MailMenu } from "../cmps/mail-menu.jsx";
+import { SideNav } from "../cmps/side-nav.jsx";
 
 const { useEffect, useState } = React
 const { Link } = ReactRouterDOM
-
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
@@ -26,22 +25,45 @@ export function MailIndex() {
         }
         )
     }
-    // function onSelectBook(book) {
-    //     setSelectedBook(book)
-    // }
+
+    const onSendMail = mail => {
+        mailService.saveEmail(mail).then(() => {
+            loadMails()
+        })
+    }
+
+    function onRemoveEmail(mailId) {
+        mailService.removeEmail(mailId).then(() => {
+            const updateMails = mails.filter(mail => mail.id !== mailId)
+            setMails(updateMails)
+        })
+        setMails(mails);
+    }
 
     // console.log('render')
     return <div className="main-layout">
-        {/* Main Navigation */}
-        <MailMainNav />
-        {/* newEmail */}
+        <input
+            type="search"
+            className="search-input"
+            placeholder="Search" />
+        <SideNav />
 
-        {/* <button><Link to={NewMail}></Link></button> */}
-        {/* <NewMail /> */}
-        {/* Mails  */}
-        <MailList
-            // onSelectMail={onSelectMail} 
-            mails={mails} />
+        <div>
+            <button className="menu-btn">Compose</button><button className="menu-btn"></button><button className="menu-btn"></button>
+        </div>
+
+
+        <EmailList
+            mails={mails}
+            onRemoveEmail={onRemoveEmail}
+        />
+
+        <EmailCompose
+            onSendMail={onSendMail}
+        />
+
     </div>
 }
+
+
 
