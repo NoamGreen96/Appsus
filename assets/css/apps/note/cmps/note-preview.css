@@ -9,13 +9,36 @@
   /* float: left; */
 }
 
+.note-content::placeholder,
+.note-title::placeholder {
+  color: black;
+}
+
+.btn-background-color {
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+.note-background-color {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+}
+
+/* .fa-solid fa-palette {
+  height: 2.1875rem;
+  width: 2.1875rem;
+} */
+
 .btn-delete-note {
   position: absolute;
   top: 0;
   opacity: 0;
 }
 
-.note:hover .btn-delete-note {
+/* .note:hover .btn-delete-note {
   transition: 0.7s;
   opacity: 1;
   cursor: pointer;
@@ -26,15 +49,25 @@
   width: 1.5rem;
   height: 1.5rem;
   /* background-color: rgb(213, 81, 81); */
-  background-color: black;
-  color: whitesmoke;
-}
 
 .img-3dots {
   opacity: 0;
   height: 15px;
   width: 25px;
 }
+
+.dropdown-item article {
+  width: auto;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover article {
+  width: 100%;
+}
+
+/* .row {
+  background-color: green;
+} */
 
 .note:hover .img-3dots {
   cursor: pointer;

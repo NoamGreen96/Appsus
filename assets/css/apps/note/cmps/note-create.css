@@ -1,4 +1,4 @@
-form {
+form .note-inputs {
   position: relative;
   max-width: 600px;
   background-color: #fff;
@@ -7,6 +7,7 @@ form {
   box-shadow: 0 1px 7px rgb(128, 128, 128);
   padding: 0.4375em;
   margin-block-end: 40px;
+  transition: 0.7s;
 }
 
 .btn-submit {
@@ -37,8 +38,13 @@ textarea {
   border: none;
   resize: none;
   font-size: 1rem;
+  transition: 0.7s;
 }
 
+.note-content,
+.note-title {
+  color: black;
+}
 /* textarea {
   font-size: 1.6rem;
   line-height: 2.4rem;

@@ -33,15 +33,15 @@ function _createNotes() {
     }
 }
 
-function _createNote(title, content, backgroundColor = '#fff') {
+function _createNote(title, content,) {
     console.log('title,content', title, content)
-    const newNote = { title, content, backgroundColor }
+    const newNote = { title, content, }
     newNote.id = utilService.makeId()
     return newNote
 }
 
 function getEmptyNote() {
-    return { title: '', content: '' }
+    return { title: '', content: '', backgroundColor: '#fff' }
 }
 
 function save(note) {

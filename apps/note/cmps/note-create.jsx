@@ -6,7 +6,7 @@ import { showSuccessMsg } from '../../../services/event-bus.service.js'
 export function CreateNote({ notes, setNotes, onAdd }) {
   const [newNote, setNewNote] = useState(noteService.getEmptyNote())
   const [showTitle, setShowTitle] = useState(false)
-
+  const [backgroundColor, setBackgroundColor] = useState(notes.backgroundColor)
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (notes) {
@@ -44,19 +44,24 @@ export function CreateNote({ notes, setNotes, onAdd }) {
       const updatedNotes = [...notes, note]
       setNotes(updatedNotes)
       showSuccessMsg('Note successfully added!')
+      setNewNote({ title: '', content: '' })
+      setBackgroundColor('')
     })
   }
+
   function handleColorChange({ target }) {
-    newNote.backgroundColor = target.value
+    setBackgroundColor(target.value)
+    setNewNote((prevNote) => ({ ...prevNote, backgroundColor }))
+    console.log('newNote.backgroundColor', newNote.backgroundColor)
   }
 
-  const { title, content, color } = notes
-
+  const { title, content } = newNote
   return (
     <div className="create-note-container">
-      <form>
+      <form className="note-inputs" style={{ backgroundColor }}>
         {showTitle && (
           <input
+            style={{ backgroundColor }}
             value={title}
             className="note-title"
             type="text"
@@ -65,11 +70,13 @@ export function CreateNote({ notes, setNotes, onAdd }) {
             onChange={handleChange}
             onBlur={handleTitleBlur}
             onClick={handleTitleClick}
+            // style={{ backgroundColor: `${notes.backgroundColor}` }}
           />
         )}
 
         <p>
           <textarea
+            style={{ backgroundColor }}
             value={content}
             name="content"
             className="note-content"
@@ -81,14 +88,18 @@ export function CreateNote({ notes, setNotes, onAdd }) {
         <button onClick={onSubmitNote} className="btn-submit">
           Add
         </button>
-        <input
-          value={color}
-          className="note-background-color"
-          type="color"
-          placeholder="Note backgroundColor"
-          name="backgroundColor"
-          onChange={handleColorChange}
-        />
+        <button className="btn-background-color">
+          <i className="fa-solid fa-palette"></i>
+          <input
+            value={backgroundColor}
+            className="note-background-color"
+            type="color"
+            placeholder="Note backgroundColor"
+            name="backgroundColor"
+            // onChange={handleChange}
+            onChange={handleColorChange}
+          />
+        </button>
       </form>
     </div>
   )
