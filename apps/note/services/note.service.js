@@ -8,17 +8,28 @@ export const noteService = {
     query,
     save,
     getEmptyNote,
-    remove
+    remove,
+    getDefaultFilter
 }
 
 function remove(noteId) {
     return asyncStorageService.remove(NOTE_KEY, noteId)
 }
 
-function query() {
-    return asyncStorageService.query(NOTE_KEY).then(notes => {
-        return notes
-    })
+function query(filterBy = {}) {
+    return asyncStorageService.query(NOTE_KEY)
+        .then(notes => {
+            const regExp = new RegExp(filterBy.filter, 'i')
+            console.log(filterBy.filter)
+            notes = notes.filter(note => {
+                return regExp.test(note.title)
+            })
+            return notes
+        })
+}
+
+function getDefaultFilter() {
+    return { filter: '' }
 }
 
 function _createNotes() {

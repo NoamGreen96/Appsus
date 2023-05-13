@@ -1,10 +1,11 @@
-// export const NotePreview = ({ note, notId }) => {
-//   console.log('note', note)
-//   // return <li>{note.title}</li>
-const { useState } = React
+const { useState, useEffect } = React
+
 import { DropDownItem } from './dropdown-item.jsx'
+
 export const NotePreview = ({ note, onRemoveNote }) => {
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {}, [open])
 
   return (
     <article className="note-preview">
@@ -23,7 +24,11 @@ export const NotePreview = ({ note, onRemoveNote }) => {
       </div>
       <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
         <ul className=" clean-list">
-          <DropDownItem onRemoveNote={onRemoveNote} noteId={note.id} />
+          <DropDownItem
+            onRemoveNote={onRemoveNote}
+            noteId={note.id}
+            setOpen={setOpen}
+          />
         </ul>
       </div>
     </article>

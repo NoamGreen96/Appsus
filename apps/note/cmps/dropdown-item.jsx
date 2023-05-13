@@ -1,5 +1,4 @@
 export function DropDownItem({ onRemoveNote, noteId }) {
-  console.log('noteId', noteId)
   return (
     <React.Fragment>
       <li className="dropdown-item clean-list">

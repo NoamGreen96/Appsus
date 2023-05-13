@@ -7,16 +7,21 @@ import {
   showErrorMsg,
   showSuccessMsg,
 } from '../../../services/event-bus.service.js'
+import { NoteFilter } from '../cmps/note-filter.jsx'
 
 export function NoteIndex() {
   const [notes, setNotes] = useState([])
-
+  const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
   useEffect(() => {
     loadNotes()
-  }, [])
+  }, [filterBy])
+
+  function onSetFilter(filterBy) {
+    setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
+  }
 
   function loadNotes() {
-    noteService.query().then(setNotes)
+    noteService.query(filterBy).then(setNotes)
   }
 
   function onRemoveNote(noteId) {
@@ -31,6 +36,7 @@ export function NoteIndex() {
   return (
     <section className="note-index">
       <h1>Note App</h1>
+      <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
       <CreateNote notes={notes} setNotes={setNotes} />
       <NoteList notes={notes} onRemoveNote={onRemoveNote} />
     </section>

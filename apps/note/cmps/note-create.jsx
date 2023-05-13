@@ -57,8 +57,8 @@ export function CreateNote({ notes, setNotes, onAdd }) {
 
   const { title, content } = newNote
   return (
-    <div className="create-note-container">
-      <form className="note-inputs" style={{ backgroundColor }}>
+    <div className="create-note-container flex ">
+      <form className="note-inputs " style={{ backgroundColor }}>
         {showTitle && (
           <input
             style={{ backgroundColor }}
@@ -88,18 +88,20 @@ export function CreateNote({ notes, setNotes, onAdd }) {
         <button onClick={onSubmitNote} className="btn-submit">
           Add
         </button>
-        <button className="btn-background-color">
-          <i className="fa-solid fa-palette"></i>
-          <input
-            value={backgroundColor}
-            className="note-background-color"
-            type="color"
-            placeholder="Note backgroundColor"
-            name="backgroundColor"
-            // onChange={handleChange}
-            onChange={handleColorChange}
-          />
-        </button>
+        {showTitle && (
+          <button className="btn-background-color">
+            <i className="fa-solid fa-palette color-icon"></i>
+            <input
+              value={backgroundColor}
+              className="note-background-color"
+              type="color"
+              placeholder="Note backgroundColor"
+              name="backgroundColor"
+              // onChange={handleChange}
+              onChange={handleColorChange}
+            />
+          </button>
+        )}
       </form>
     </div>
   )

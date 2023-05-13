@@ -6,12 +6,14 @@
   box-shadow: 0 2px 5px rgb(175, 175, 175);
   padding: 0.625rem;
   margin: 1rem;
-  /* float: left; */
+  word-wrap: break-word;
 }
 
 .note-content::placeholder,
 .note-title::placeholder {
   color: black;
+  padding: 5px;
+  background-color: transparent;
 }
 
 .btn-background-color {
@@ -27,28 +29,11 @@
   opacity: 0;
 }
 
-/* .fa-solid fa-palette {
-  height: 2.1875rem;
-  width: 2.1875rem;
-} */
-
 .btn-delete-note {
   position: absolute;
   top: 0;
   opacity: 0;
 }
-
-/* .note:hover .btn-delete-note {
-  transition: 0.7s;
-  opacity: 1;
-  cursor: pointer;
-  position: absolute;
-  border-radius: 50%;
-  right: 0;
-  top: -10px;
-  width: 1.5rem;
-  height: 1.5rem;
-  /* background-color: rgb(213, 81, 81); */
 
 .img-3dots {
   opacity: 0;
@@ -58,16 +43,12 @@
 
 .dropdown-item article {
   width: auto;
-  transition: all 0.3s ease;
+  transition: all 0.7s ease;
 }
 
 .dropdown-item:hover article {
   width: 100%;
 }
-
-/* .row {
-  background-color: green;
-} */
 
 .note:hover .img-3dots {
   cursor: pointer;
@@ -77,7 +58,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 6.25rem;
+  /* top: 6.25rem; */
   right: 3.75rem;
   background-color: #fff;
   padding: 0.625rem 1.25rem;
@@ -101,14 +82,12 @@
 
 .dropdown-menu.active {
   opacity: 1;
-  visibility: visible;
   transform: translateY(0);
   transition: 0.5ms ease;
 }
 
 .dropdown-menu.inactive {
   opacity: 0;
-  visibility: hidden;
   transform: translateY(-1.25rem);
-  transition: 0.8ms ease;
+  transition: 0.5ms ease;
 }

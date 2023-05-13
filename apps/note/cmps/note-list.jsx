@@ -3,7 +3,7 @@ import { NotePreview } from './note-preview.jsx'
 export function NoteList({ notes, onRemoveNote }) {
   console.log('notes', notes)
   return (
-    <ul className="clean-list flex">
+    <ul className="list-container clean-list flex">
       {notes.map((note) => (
         <li
           style={{ backgroundColor: `${note.backgroundColor}` }}

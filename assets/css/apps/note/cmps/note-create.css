@@ -1,5 +1,7 @@
-form .note-inputs {
+.note-inputs {
   position: relative;
+  width: 100%;
+  height: 2.8125rem;
   max-width: 600px;
   background-color: #fff;
   border-radius: 7px;
@@ -8,6 +10,12 @@ form .note-inputs {
   padding: 0.4375em;
   margin-block-end: 40px;
   transition: 0.7s;
+}
+
+.color-icon {
+  opacity: 1;
+  /* position: absolute; */
+  /* top: 100vh; */
 }
 
 .btn-submit {
@@ -31,7 +39,7 @@ form:hover .btn-submit {
   padding: 4px;
 }
 
-form input,
+input,
 textarea {
   outline: none;
   width: 100%;
@@ -41,23 +49,6 @@ textarea {
   transition: 0.7s;
 }
 
-.note-content,
-.note-title {
-  color: black;
-}
-/* textarea {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  border: none;
-  resize: none;
-  padding: 0;
+.note-inputs p {
   margin: 0;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-} */
-
-/* .note-title:focus,
-.note-content:focus {
-  background-color: blue;
-} */
+}

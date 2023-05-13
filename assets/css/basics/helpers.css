@@ -27,3 +27,11 @@
   margin: 0;
   list-style-type: none;
 }
+
+.closed {
+  height: 2.8125rem;
+}
+
+.opened {
+  height: 8.125rem;
+}
