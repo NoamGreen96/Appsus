@@ -1,7 +1,84 @@
+form.new-email {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 461px;
+  min-height: 500px;
+  box-shadow: 0 0 10px rgba(71, 90, 122, 0.5);
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
 
-.new-email{
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    /* height: 0; */
+.compose-btn {
+  margin: 30px;
+  padding: 20px;
+  cursor: pointer;
+  background-color: gray;
+  border-radius: 20px;
+}
+
+.submit {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 350px;
+}
+.mail-compose-to {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-line-color);
+}
+.new-email {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.new-email form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-email label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.new-email input[type='email'],
+.new-email input[type='text'],
+.new-email textarea {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.new-email textarea {
+  height: 200px;
+}
+
+.new-email button[type='submit'] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.new-email button[type='submit']:hover {
+  background-color: #3e8e41;
+}
+.close-modal-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0px 0px 30px;
 }

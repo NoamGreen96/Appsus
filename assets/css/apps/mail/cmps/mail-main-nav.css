@@ -1,16 +1,22 @@
 .mail-main-nav {
   display: flex;
-  /* justify-content: s; */
-  /* padding: 20px 4.5em; */
-  /* color: rgb(90, 87, 87); */
   flex: 0.3;
   max-width: 300px;
   padding-right: 20px;
-  
 }
-.sidebar {
- 
-}
+
 .search-input {
-margin-left: 2em;
-} 
+  width: 20em;
+  background-color: #f6f8fc08;
+  right: 15px;
+  position: absolute;
+  left: 14em;
+  top: 11em;
+  padding: 23px;
+  border-radius: 11px;
+}
+.modal-top-line {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+}

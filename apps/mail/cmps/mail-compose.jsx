@@ -2,7 +2,7 @@ const { useState } = React
 
 import { mailService } from "../services/mail.service.js";
 
-export const EmailCompose = ({ onSendMail }) => {
+export const EmailCompose = ({ isModalOpen, onSendMail, onToggleModal }) => {
 
   const [mail, setMail] = useState(mailService.createMail())
 
@@ -10,16 +10,19 @@ export const EmailCompose = ({ onSendMail }) => {
     ev.preventDefault()
     onSendMail(mail)
   }
-
+  if (!isModalOpen) return null
   return (
-    <form onSubmit={sendEmail} className="new- 
-     email">
-
-      <label htmlFor="to">To:</label>
+    <form onSubmit={sendEmail} className="new-email">
+      <div className="modal-top-line"> New Message
+        <button className="close-modal-btn" onClick={() => onToggleModal()}>
+          X
+        </button>
+      </div> <label htmlFor="to">To:</label>
       <input
         type="email"
         id="to"
         name="to"
+        placeholder="To"
         value={mail.to}
         onChange={ev => setMail({ ...mail, to: ev.target.value })}
       />
@@ -29,6 +32,7 @@ export const EmailCompose = ({ onSendMail }) => {
         type="text"
         id="subject"
         name="subject"
+        placeholder="subject"
         value={mail.subject}
         onChange={ev => setMail({ ...mail, subject: ev.target.value })}
       />
@@ -44,8 +48,7 @@ export const EmailCompose = ({ onSendMail }) => {
       >
       </textarea>
       <button type="submit">Send</button>
-
-
     </form>
+
   )
 }

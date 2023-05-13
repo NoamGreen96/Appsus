@@ -3,31 +3,38 @@ import { mailService } from "../services/mail.service.js";
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
 import { EmailCompose } from "../cmps/mail-compose.jsx";
 import { MailMenu } from "../cmps/mail-menu.jsx";
-import { SideNav } from "../cmps/side-nav.jsx";
+import { EmailFolderList } from "../cmps/side-nav.jsx";
+import { EmailPreview } from "../cmps/mail-preview.jsx";
+
 
 const { useEffect, useState } = React
-const { Link } = ReactRouterDOM
+const { Link, useSearchParams } = ReactRouterDOM
 
 export function MailIndex() {
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [mails, setMails] = useState([])
-    // const [selectedMail, setSelectedMail] = useState(null)
 
     useEffect(() => {
-        showSuccessMsg('Welcome to mail')
         loadMails()
-    })
+        setSearchParams(filterBy)
+    }, [filterBy])
 
 
     function loadMails() {
-        mailService.query().then(mail => {
-            // console.log(mail)
-            return setMails(mail)
-        }
-        )
+        mailService.query(filterBy).then(setMails)
+    }
+
+    const onToggleModal = () => {
+        setIsModalOpen(!isModalOpen)
     }
 
     const onSendMail = mail => {
         mailService.saveEmail(mail).then(() => {
+            onToggleModal()
+            showSuccessMsg('Massage Sent')
             loadMails()
         })
     }
@@ -36,33 +43,48 @@ export function MailIndex() {
         mailService.removeEmail(mailId).then(() => {
             const updateMails = mails.filter(mail => mail.id !== mailId)
             setMails(updateMails)
+            showSuccessMsg('Massage Delete')
         })
         setMails(mails);
     }
 
-    // console.log('render')
-    return <div className="main-layout">
-        <input
-            type="search"
-            className="search-input"
-            placeholder="Search" />
-        <SideNav />
+    function onSetFilter(filterBy) {
+        setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
 
-        <div>
-            <button className="menu-btn">Compose</button><button className="menu-btn"></button><button className="menu-btn"></button>
-        </div>
+    }
+
+    console.log('render')
+    return (
+        <div className="main-layout">
+            <EmailCompose
+                onToggleModal={onToggleModal}
+                isModalOpen={isModalOpen}
+                onSendMail={onSendMail}
+            />
+            <div className="left-side flex column main-filter">
+                <MailMenu onToggleModal={onToggleModal} />
+            </div>
+            <input
+                type="search"
+                className="search-input"
+                placeholder="🔍 Search" />
+
+            <EmailFolderList onSetFilter={onSetFilter}
+                filterBy={filterBy} />
+
+            <EmailList
+                mails={mails}
+                onRemoveEmail={onRemoveEmail}
+            />
+
+            <footer>
+                © coffeRihgts.com, Inc. All rights reserved.
+            </footer>
+            {/* <EmailDetails /> */}
+            {/* <EmailFilter/> */}
 
 
-        <EmailList
-            mails={mails}
-            onRemoveEmail={onRemoveEmail}
-        />
-
-        <EmailCompose
-            onSendMail={onSendMail}
-        />
-
-    </div>
+        </div>)
 }
 
 

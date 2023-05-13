@@ -1,0 +1,32 @@
+.side-nav {
+  grid-column: 1;
+  /* background-color: lightgray; */
+}
+.search-input {
+  grid-column: 2;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  background-color: #f6f8fc;
+}
+.aside-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.aside-bar button {
+  margin: 2px;
+  cursor: pointer;
+  height: 20px;
+  padding: 25px;
+  text-align: center;
+  border: 0;
+  background-color: #f6f8fc;
+}
+
+.aside-bar button:hover {
+  border-radius: 30px;
+  background-color: #93addb94;
+}

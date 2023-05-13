@@ -17,6 +17,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'May 18',
     removedAt: null,
+    folder: 'inbox',
     from: 'johndoe@example.com',
     to: 'janedoe@example.com'
   },
@@ -27,6 +28,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'Feb 28',
     removedAt: null,
+    folder: 'inbox',
     from: 'manager@example.com',
     to: 'employee@example.com'
   },
@@ -37,6 +39,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Jul 12',
     removedAt: null,
+    folder: 'inbox',
     from: 'support@example.com',
     to: 'user@example.com'
   },
@@ -47,6 +50,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Aug 20',
     removedAt: null,
+    folder: 'inbox',
     from: 'marketing@example.com',
     to: 'customers@example.com'
   },
@@ -57,6 +61,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'Aug 17',
     removedAt: null,
+    folder: 'inbox',
     from: 'security@example.com',
     to: 'user@example.com'
   },
@@ -67,6 +72,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Aug 13',
     removedAt: null,
+    folder: 'inbox',
     from: 'events@example.com',
     to: 'guest@example.com'
   },
@@ -77,6 +83,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'Feb 28',
     removedAt: null,
+    folder: 'inbox',
     from: 'sales@example.com',
     to: 'customer@example.com'
   },
@@ -87,6 +94,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'May 20',
     removedAt: null,
+    folder: 'inbox',
     from: 'recruiting@example.com',
     to: 'applicant@example.com'
   },
@@ -97,6 +105,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Jul 4',
     removedAt: null,
+    folder: 'inbox',
     from: 'airlines@example.com',
     to: 'passenger@example.com'
   }
@@ -108,6 +117,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'May 4',
     removedAt: null,
+    folder: 'inbox',
     from: 'support@example.com',
     to: 'user@example.com'
   },
@@ -118,6 +128,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'Aug 2',
     removedAt: null,
+    folder: 'inbox',
     from: 'legal@example.com',
     to: 'user@example.com'
   },
@@ -128,6 +139,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Jan 1',
     removedAt: null,
+    folder: 'inbox',
     from: 'friends@example.com',
     to: 'user@example.com'
   },
@@ -138,6 +150,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Dec 3',
     removedAt: null,
+    folder: 'inbox',
     from: 'recruiting@example.com',
     to: 'applicant@example.com'
   },
@@ -148,6 +161,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Dec 2',
     removedAt: null,
+    folder: 'inbox',
     from: 'subscriptions@example.com',
     to: 'user@example.com'
   },
@@ -158,6 +172,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'Dec 1',
     removedAt: null,
+    folder: 'inbox',
     from: 'sales@example.com',
     to: 'customer@example.com'
   },
@@ -168,6 +183,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Nov 3',
     removedAt: null,
+    folder: 'inbox',
     from: 'it@example.com',
     to: 'user@example.com'
   },
@@ -178,6 +194,7 @@ const gEmails = [
     isRead: false,
     sentAt: 'Aug 2',
     removedAt: null,
+    folder: 'inbox',
     from: 'feedback@example.com',
     to: 'user@example.com'
   },
@@ -188,6 +205,7 @@ const gEmails = [
     isRead: true,
     sentAt: 'May 2',
     removedAt: null,
+    folder: 'inbox',
     from: 'friends@example.com',
     to: 'user@example.com'
   },
@@ -203,15 +221,46 @@ export const mailService = {
   getEmptyMail,
   createMail,
   updateEmail,
+  getDefaultFilter
   // getEmailMenu
 
 }
-
-function query() {
-  return asyncStorageService.query(MAIL_KEY).then(mails => {
-    return mails
-  })
+function getDefaultFilter(searchParams = { get: () => { } }) {
+  return {
+    folder: searchParams.get('folder') || ''
+  }
 }
+
+function getEmptyMail(title = '', description = '') {
+  return { id: '', title, description }
+}
+
+
+function query(filterBy = {}) {
+  //   return asyncStorageService.query(MAIL_KEY).then(mails => {
+  //     if(filter)
+  //     return mails
+  //   })
+
+  return asyncStorageService.query(MAIL_KEY)
+    .then(mails => {
+      if (filterBy.folder) {
+        const regExp = new RegExp(filterBy.folder, 'i')
+        mails = mails.filter(mail => regExp.test(mail.folder))
+      }
+
+      // if (filterBy.price) {
+      //   books = books.filter(book => book.listPrice.amount >= filterBy.price)
+      // }
+
+      // if (filterBy.sale) {
+      //   books = books.filter(book => book.listPrice.isOnSale === filterBy.sale)
+      // }
+      return mails
+    })
+}
+
+
 function saveEmail(mail) {
   return asyncStorageService.post(MAIL_KEY, mail)
 }
@@ -250,14 +299,12 @@ function createMail(subject, body) {
     isRead: false,
     sentAt: dateFormatter(),
     removedAt: null,
+    folder: 'sent',
     from: logginUser.email,
   }
   return email
 }
 
-function getEmptyMail(title = '', description = '') {
-  return { id: '', title, description }
-}
 
 
 
