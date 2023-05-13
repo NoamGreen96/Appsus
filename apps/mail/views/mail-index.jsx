@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import { EmailList } from '../cmps/mail-list.jsx'
-import { mailService } from '../services/mail.service.js'
-import {
-  showSuccessMsg,
-  showErrorMsg,
-} from '../../../services/event-bus.service.js'
-import { EmailCompose } from '../cmps/mail-compose.jsx'
-import { MailMenu } from '../cmps/mail-menu.jsx'
-import { EmailFolderList } from '../cmps/side-nav.jsx'
-import { EmailPreview } from '../cmps/mail-preview.jsx'
-=======
 import { EmailList } from "../cmps/mail-list.jsx";
 import { mailService } from "../services/mail.service.js";
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
@@ -18,7 +6,6 @@ import { MailMenu } from "../cmps/mail-menu.jsx";
 import { EmailFolderList } from "../cmps/side-nav.jsx";
 import { EmailPreview } from "../cmps/mail-preview.jsx";
 import { EmailFilter } from "../cmps/email-filter.jsx";
->>>>>>> f9f95a2cb89b7c10d6111d8caff813dceef85de4
 
 const { useEffect, useState } = React
 const { Link, useSearchParams } = ReactRouterDOM
