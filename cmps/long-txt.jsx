@@ -1,6 +1,6 @@
 const { useState } = React
 
-export function LongTxt({ txt, length }) {
+export function LongTxt({ txt, length = 50 }) {
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -12,10 +12,6 @@ export function LongTxt({ txt, length }) {
   return (
     <section>
       <p> {cutTxtByLength()} </p>
-      {txt.length > length &&
-        <button onClick={() => setIsOpen(isOpen => !isOpen)}>
-          {isOpen ? 'Read Less' : 'Read More'}
-        </button>}
     </section>
   )
 }

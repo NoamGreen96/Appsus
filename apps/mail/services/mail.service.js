@@ -209,9 +209,31 @@ const gEmails = [
     from: 'friends@example.com',
     to: 'user@example.com'
   },
+  {
+    id: 'e120',
+    subject: 'Congratulations!',
+    body: 'Congratulations on your recent achievement. We are proud of you!',
+    isRead: true,
+    sentAt: 'May 2',
+    removedAt: null,
+    folder: 'trash',
+    from: 'friends@example.com',
+    to: 'user@example.com'
+  },
+  {
+    id: 'e121',
+    subject: 'Important Update',
+    body: 'Please be informed that there has been an important update regarding our services. Kindly visit our website for more details.',
+    isRead: true,
+    sentAt: 'May 13',
+    removedAt: null,
+    folder: 'sent',
+    from: 'services@example.com',
+    to: 'user@example.com'
+  },
 ]
 
-_createEmails()
+createEmails()
 
 export const mailService = {
   query,
@@ -222,7 +244,6 @@ export const mailService = {
   createMail,
   updateEmail,
   getDefaultFilter
-  // getEmailMenu
 
 }
 function getDefaultFilter(searchParams = { get: () => { } }) {
@@ -237,29 +258,15 @@ function getEmptyMail(title = '', description = '') {
 
 
 function query(filterBy = {}) {
-  //   return asyncStorageService.query(MAIL_KEY).then(mails => {
-  //     if(filter)
-  //     return mails
-  //   })
-
   return asyncStorageService.query(MAIL_KEY)
     .then(mails => {
       if (filterBy.folder) {
         const regExp = new RegExp(filterBy.folder, 'i')
         mails = mails.filter(mail => regExp.test(mail.folder))
       }
-
-      // if (filterBy.price) {
-      //   books = books.filter(book => book.listPrice.amount >= filterBy.price)
-      // }
-
-      // if (filterBy.sale) {
-      //   books = books.filter(book => book.listPrice.isOnSale === filterBy.sale)
-      // }
       return mails
     })
 }
-
 
 function saveEmail(mail) {
   return asyncStorageService.post(MAIL_KEY, mail)
@@ -277,7 +284,7 @@ function removeEmail(mailId) {
   return asyncStorageService.remove(MAIL_KEY, mailId)
 }
 
-function _createEmails() {
+function createEmails() {
   let mails = storageService.loadFromStorage(MAIL_KEY) || []
   if (!mails || !mails.length) {
     mails = gEmails
@@ -296,7 +303,7 @@ function createMail(subject, body) {
     id: utilService.makeId(),
     subject,
     body,
-    isRead: false,
+    isRead: true,
     sentAt: dateFormatter(),
     removedAt: null,
     folder: 'sent',
@@ -304,24 +311,3 @@ function createMail(subject, body) {
   }
   return email
 }
-
-
-
-
-// export function getEmailMenu() {
-//   return [
-//     {
-//       title: 'Inbox',
-//       // icon: '/path/assets/img/Gmail/inbox.png',
-//     },
-//     {
-//       title: 'Starred',
-//       // icon: '/path/assets/img/Gmail/star.png',
-//     },
-//     {
-//       title: 'Sent',
-//       // icon: '/path/assets/img/Gmail/sent.png',
-//     },
-
-//   ]
-// }

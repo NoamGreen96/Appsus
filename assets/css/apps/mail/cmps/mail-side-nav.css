@@ -1,6 +1,5 @@
 .side-nav {
   grid-column: 1;
-  /* background-color: lightgray; */
 }
 .search-input {
   grid-column: 2;
@@ -9,7 +8,9 @@
 .main-layout {
   display: grid;
   grid-template-columns: 1fr 8fr;
-  background-color: #f6f8fc;
+  grid-template-rows: 7em 1fr;
+  /* background-color: #f6f8fc; */
+  height: 88vh;
 }
 .aside-bar {
   display: flex;
@@ -23,10 +24,22 @@
   padding: 25px;
   text-align: center;
   border: 0;
-  background-color: #f6f8fc;
+  background: transparent;
 }
 
 .aside-bar button:hover {
   border-radius: 30px;
   background-color: #93addb94;
+}
+
+.email-preview {
+  position: absolute;
+  top: 112px;
+  left: 10em;
+  bottom: 0em;
+  width: 89%;
+  /* height: 100%; */
+  background-color: #ffff;
+  overflow: auto;
+  padding: 20px;
 }
