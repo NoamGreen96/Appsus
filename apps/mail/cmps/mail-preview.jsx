@@ -1,4 +1,4 @@
-import { LongTxt } from "../../../cmps/long-txt"
+// import { LongTxt } from "../../../cmps/long-txt"
 
 
 export function EmailPreview({ mail, onRemoveEmail }) {
@@ -6,12 +6,16 @@ export function EmailPreview({ mail, onRemoveEmail }) {
 
   return (
     <React.Fragment>
-      <td>  <button onClick={() => onRemoveEmail(mail.id)}>Delete this mail Mail</button>
-      </td>
-      <td>{mail.from}</td>
-      <td>{mail.subject}</td>
-      <td>{mail.body}</td>
-      <td>{mail.sentAt}</td>
+      <div>
+        <div>title</div>
+        <div>subject</div>
+        <div>text size
+
+        </div>
+
+
+
+      </div>
     </React.Fragment>
   )
 }

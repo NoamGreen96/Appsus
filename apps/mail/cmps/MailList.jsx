@@ -1,4 +1,5 @@
-export const MailMenu = ({ onToggleModal }) => {
+
+export function MailMenu({ onToggleModal }) {
 
   return (
     <section className="mail-menu flex column">
