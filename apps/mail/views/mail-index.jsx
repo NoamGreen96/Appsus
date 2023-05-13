@@ -5,7 +5,7 @@ import { EmailCompose } from "../cmps/mail-compose.jsx";
 import { MailMenu } from "../cmps/mail-menu.jsx";
 import { EmailFolderList } from "../cmps/side-nav.jsx";
 import { EmailPreview } from "../cmps/mail-preview.jsx";
-
+import { EmailFilter } from "../cmps/email-filter.jsx";
 
 const { useEffect, useState } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -21,7 +21,6 @@ export function MailIndex() {
         loadMails()
         setSearchParams(filterBy)
     }, [filterBy])
-
 
     function loadMails() {
         mailService.query(filterBy).then(setMails)
@@ -50,10 +49,9 @@ export function MailIndex() {
 
     function onSetFilter(filterBy) {
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
-
     }
 
-    console.log('render')
+    // console.log('render')
     return (
         <div className="main-layout">
             <EmailCompose
@@ -64,10 +62,11 @@ export function MailIndex() {
             <div className="left-side flex column main-filter">
                 <MailMenu onToggleModal={onToggleModal} />
             </div>
-            <input
-                type="search"
-                className="search-input"
-                placeholder="🔍 Search" />
+
+            <EmailFilter
+                onSetFilter=
+                {onSetFilter}
+                filterBy={filterBy} />
 
             <EmailFolderList onSetFilter={onSetFilter}
                 filterBy={filterBy} />
@@ -78,14 +77,11 @@ export function MailIndex() {
             />
 
             <footer>
-                © coffeRihgts.com, Inc. All rights reserved.
+                © All rights reserved.
             </footer>
+
             {/* <EmailDetails /> */}
-            {/* <EmailFilter/> */}
 
 
         </div>)
 }
-
-
-

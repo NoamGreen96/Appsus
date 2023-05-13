@@ -1,23 +1,26 @@
 /* mail list */
-
-.fl-table {
+tr.unread {
+  font-weight: bold;
+}
+.mail-list-container {
   flex: 1;
   padding: 8px;
+  width: 100%;
   border-collapse: collapse;
 }
 
-.fl-table td,
-.fl-table th {
+.mail-list-container td,
+.mail-list-container th {
   padding: 8px;
   border-bottom: 1px solid lightgray;
   border-top: 1px solid lightgray;
 }
 
-.fl-table td {
+.mail-list-container td {
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
 }
-.fl-table tr:hover {
+.mail-list-container tr:hover {
   background-color: rgba(169, 215, 217, 0.752);
   cursor: pointer;
 }
