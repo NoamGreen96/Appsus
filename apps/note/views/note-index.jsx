@@ -1,5 +1,4 @@
 const { useState, useEffect } = React
-
 import { CreateNote } from '../cmps/note-create.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
 import { noteService } from '../services/note.service.js'
@@ -25,17 +24,17 @@ export function NoteIndex() {
   }
 
   function onRemoveNote(noteId) {
+    console.log('remove from index', noteId)
     noteService.remove(noteId).then(() => {
       const updatedNotes = notes.filter((note) => note.id !== noteId)
       setNotes(updatedNotes)
-      showSuccessMsg(`Note (${noteId}) removed!`)
+      console.log(updatedNotes)
+      // showSuccessMsg(`Note (${noteId}) removed!`)
     })
   }
 
-  console.log('notes at index', notes)
   return (
     <section className="note-index">
-      <h1>Note App</h1>
       <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
       <CreateNote notes={notes} setNotes={setNotes} />
       <NoteList notes={notes} onRemoveNote={onRemoveNote} />

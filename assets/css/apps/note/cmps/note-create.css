@@ -1,7 +1,7 @@
 .note-inputs {
   position: relative;
   width: 100%;
-  height: 2.8125rem;
+  min-height: 2.8125rem;
   max-width: 600px;
   background-color: #fff;
   border-radius: 7px;
@@ -12,10 +12,15 @@
   transition: 0.7s;
 }
 
+.note-inputs.closed {
+  height: 2.875rem;
+}
+.note-inputs.opened {
+  height: 8.4375rem;
+}
+
 .color-icon {
   opacity: 1;
-  /* position: absolute; */
-  /* top: 100vh; */
 }
 
 .btn-submit {
@@ -47,8 +52,74 @@ textarea {
   resize: none;
   font-size: 1rem;
   transition: 0.7s;
+  font-family: Roboto;
 }
 
 .note-inputs p {
   margin: 0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 3.75rem;
+  background-color: #fff;
+  padding: 0.625rem 1.25rem;
+  width: 9.375rem;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+
+.dropdown-menu ul li {
+  padding: 0.3125rem 1.0625rem 0.3125rem 0.625rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: #503d3d35;
+  cursor: pointer;
+}
+
+.img-3dots {
+  opacity: 0;
+  height: 15px;
+  width: 25px;
+  object-fit: cover;
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5ms ease;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  transform: translateY(5000px);
+  transition: 0.5ms ease;
+}
+
+.img-3dots.inactive {
+  opacity: 0;
+}
+
+.img-3dots.active {
+  opacity: 1;
+}
+
+.dropdown-item article {
+  width: auto;
+  transition: all 0.7s ease;
+}
+
+.dropdown-item:hover article {
+  width: 100%;
+}
+
+.note:hover .img-3dots {
+  cursor: pointer;
+  transition: 0.7s;
+  opacity: 1;
 }

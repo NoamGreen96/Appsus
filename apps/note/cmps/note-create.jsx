@@ -1,23 +1,54 @@
-const { useEffect, useState } = React
+const { useEffect, useState, useRef } = React
 
 import { noteService } from '../services/note.service.js'
-import { showSuccessMsg } from '../../../services/event-bus.service.js'
+import {
+  showSuccessMsg,
+  showErrorMsg,
+} from '../../../services/event-bus.service.js'
 
-export function CreateNote({ notes, setNotes, onAdd }) {
+export function CreateNote({ notes, setNotes }) {
   const [newNote, setNewNote] = useState(noteService.getEmptyNote())
   const [showTitle, setShowTitle] = useState(false)
   const [backgroundColor, setBackgroundColor] = useState(notes.backgroundColor)
+  let newNoteRef = useRef()
+
+  useEffect(() => {
+    let handler = (ev) => {
+      if (!newNoteRef.current.contains(ev.target)) {
+        setShowTitle(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+    }
+  }, [newNoteRef.current, setShowTitle])
+
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (notes) {
-        console.log('notes from debounce', notes)
       }
     }, 1000)
     return () => {
-      console.log('clear timeout')
       clearTimeout(debounce)
     }
   }, [newNote])
+
+  function onSubmitNote(ev) {
+    ev.preventDefault() // prevent form submission
+    console.log('newNote.title', newNote.title)
+    if (newNote.title.length && newNote.content.length) {
+      noteService.save(newNote).then((note) => {
+        const updatedNotes = [...notes, note]
+        setNotes(updatedNotes)
+        // showSuccessMsg('Note successfully added!')
+        setNewNote({ title: '', content: '' })
+        setBackgroundColor('')
+      })
+    } else {
+      // showErrorMsg('Please edit the note properly')
+    }
+  }
 
   function handleContentClick() {
     setShowTitle(true)
@@ -38,39 +69,46 @@ export function CreateNote({ notes, setNotes, onAdd }) {
     setNewNote((prevNote) => ({ ...prevNote, [field]: value }))
   }
 
-  function onSubmitNote(ev) {
-    ev.preventDefault()
-    noteService.save(newNote).then((note) => {
-      const updatedNotes = [...notes, note]
-      setNotes(updatedNotes)
-      showSuccessMsg('Note successfully added!')
-      setNewNote({ title: '', content: '' })
-      setBackgroundColor('')
-    })
-  }
+  // function onSubmitNote() {
+  //   ev.preventDefault()
+  //   console.log('newNote.title', newNote.title)
+  //   if (newNote.title.length && newNote.content.length) {
+  //     noteService.save(newNote).then((note) => {
+  //       const updatedNotes = [...notes, note]
+  //       setNotes(updatedNotes)
+  //       showSuccessMsg('Note successfully added!')
+  //       setNewNote({ title: '', content: '' })
+  //       setBackgroundColor('')
+  //     })
+  //   } else {
+  //     showErrorMsg('Please edit the note properly')
+  //   }
+  // }
 
   function handleColorChange({ target }) {
     setBackgroundColor(target.value)
     setNewNote((prevNote) => ({ ...prevNote, backgroundColor }))
-    console.log('newNote.backgroundColor', newNote.backgroundColor)
   }
 
   const { title, content } = newNote
   return (
-    <div className="create-note-container flex ">
-      <form className="note-inputs " style={{ backgroundColor }}>
+    <div className="create-note-container flex">
+      <form
+        ref={newNoteRef}
+        className={`note-inputs ${showTitle ? 'opened' : 'closed'} `}
+        style={{ backgroundColor }}
+      >
         {showTitle && (
           <input
             style={{ backgroundColor }}
             value={title}
-            className="note-title"
+            className={`note-title ${showTitle ? 'opened' : 'closed'}`}
             type="text"
             placeholder="Note Title"
             name="title"
             onChange={handleChange}
             onBlur={handleTitleBlur}
             onClick={handleTitleClick}
-            // style={{ backgroundColor: `${notes.backgroundColor}` }}
           />
         )}
 
@@ -79,7 +117,7 @@ export function CreateNote({ notes, setNotes, onAdd }) {
             style={{ backgroundColor }}
             value={content}
             name="content"
-            className="note-content"
+            className={`note-content ${showTitle ? 'opened' : 'closed'}`}
             placeholder="Take a note..."
             onChange={handleChange}
             onClick={handleContentClick}
@@ -97,7 +135,6 @@ export function CreateNote({ notes, setNotes, onAdd }) {
               type="color"
               placeholder="Note backgroundColor"
               name="backgroundColor"
-              // onChange={handleChange}
               onChange={handleColorChange}
             />
           </button>

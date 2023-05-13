@@ -20,7 +20,6 @@ function query(filterBy = {}) {
     return asyncStorageService.query(NOTE_KEY)
         .then(notes => {
             const regExp = new RegExp(filterBy.filter, 'i')
-            console.log(filterBy.filter)
             notes = notes.filter(note => {
                 return regExp.test(note.title)
             })
@@ -45,7 +44,6 @@ function _createNotes() {
 }
 
 function _createNote(title, content,) {
-    console.log('title,content', title, content)
     const newNote = { title, content, }
     newNote.id = utilService.makeId()
     return newNote

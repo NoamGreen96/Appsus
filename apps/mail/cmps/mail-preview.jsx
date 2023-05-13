@@ -1,6 +1,5 @@
 // import { LongTxt } from "../../../cmps/long-txt"
 
-
 export function EmailPreview({ mail, onRemoveEmail }) {
   // console.log(onRemoveEmail)
 
@@ -9,12 +8,7 @@ export function EmailPreview({ mail, onRemoveEmail }) {
       <div>
         <div>title</div>
         <div>subject</div>
-        <div>text size
-
-        </div>
-
-
-
+        <div>text size</div>
       </div>
     </React.Fragment>
   )
