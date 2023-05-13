@@ -1,6 +1,18 @@
 .filter {
-  background-color: black;
+  position: relative;
+  background-color: #fff;
   width: 600px;
   height: 50px;
   color: #fff;
+  border-radius: 10px;
+  margin-left: 355px;
+  margin-bottom: 50px;
+  font-family: Roboto;
+  color: black;
+}
+
+.filter-container {
+  position: flex;
+  align-items: center;
+  justify-content: center;
 }

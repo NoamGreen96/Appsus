@@ -1,11 +1,14 @@
-import { EmailList } from "../cmps/mail-list.jsx";
-import { mailService } from "../services/mail.service.js";
-import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
-import { EmailCompose } from "../cmps/mail-compose.jsx";
-import { MailMenu } from "../cmps/mail-menu.jsx";
-import { EmailFolderList } from "../cmps/side-nav.jsx";
-import { EmailPreview } from "../cmps/mail-preview.jsx";
-import { EmailFilter } from "../cmps/email-filter.jsx";
+import { EmailList } from '../cmps/mail-list.jsx'
+import { mailService } from '../services/mail.service.js'
+import {
+  showSuccessMsg,
+  showErrorMsg,
+} from '../../../services/event-bus.service.js'
+import { EmailCompose } from '../cmps/mail-compose.jsx'
+import { MailMenu } from '../cmps/mail-menu.jsx'
+import { EmailFolderList } from '../cmps/side-nav.jsx'
+import { EmailPreview } from '../cmps/mail-preview.jsx'
+import { EmailFilter } from '../cmps/email-filter.jsx'
 
 const { useEffect, useState } = React
 const { Link, useSearchParams } = ReactRouterDOM
@@ -50,6 +53,18 @@ export function MailIndex() {
     setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
   }
 
+  //   return (
+  //     <div className="main-layout">
+  //       <EmailCompose
+  //         onToggleModal={onToggleModal}
+  //         isModalOpen={isModalOpen}
+  //         onSendMail={onSendMail}
+  //       />
+  //       <div className="left-side flex column main-filter">
+  //         <MailMenu onToggleModal={onToggleModal} />
+  //       </div>
+  //       <input type="search" className="search-input" placeholder="🔍 Search" />
+
   return (
     <div className="main-layout">
       <EmailCompose
@@ -60,43 +75,16 @@ export function MailIndex() {
       <div className="left-side flex column main-filter">
         <MailMenu onToggleModal={onToggleModal} />
       </div>
-      <input type="search" className="search-input" placeholder="🔍 Search" />
 
-    function onSetFilter(filterBy) {
-        setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
-    }
+      <EmailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
 
-    // console.log('render')
-    return (
-        <div className="main-layout">
-            <EmailCompose
-                onToggleModal={onToggleModal}
-                isModalOpen={isModalOpen}
-                onSendMail={onSendMail}
-            />
-            <div className="left-side flex column main-filter">
-                <MailMenu onToggleModal={onToggleModal} />
-            </div>
+      <EmailFolderList onSetFilter={onSetFilter} filterBy={filterBy} />
 
-            <EmailFilter
-                onSetFilter=
-                {onSetFilter}
-                filterBy={filterBy} />
+      <EmailList mails={mails} onRemoveEmail={onRemoveEmail} />
 
-            <EmailFolderList onSetFilter={onSetFilter}
-                filterBy={filterBy} />
+      <footer>© All rights reserved.</footer>
 
-            <EmailList
-                mails={mails}
-                onRemoveEmail={onRemoveEmail}
-            />
-
-            <footer>
-                © All rights reserved.
-            </footer>
-
-            {/* <EmailDetails /> */}
-
-
-        </div>)
+      {/* <EmailDetails /> */}
+    </div>
+  )
 }

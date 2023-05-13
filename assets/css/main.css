@@ -30,3 +30,6 @@
 @import './apps/mail/cmps/mail-main-nav.css';
 @import './apps/mail/cmps/new-emil.css';
 @import './apps/mail/cmps/mail-side-nav.css';
+
+/* //Books */
+@import '../../apps/miss-book/assets/style/main.css';
